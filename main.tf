@@ -21,7 +21,7 @@ provider "aws" {
      region = "us-east-1"
      # Replace this with your DynamoDB table name!
      dynamodb_table = "terraform"
-     profile = "akarsh"
+     #profile = "akarsh"
    }
  }
 
