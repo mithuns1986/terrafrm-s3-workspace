@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    tools{
+    terraform 'terraform'
+        }
+    stages {
+        stage('Check Terraform Version') {
+            steps {
+                echo 'Terraform Version is:'
+                sh 'terraform -version'
+            }
+        }
+    }
+}
