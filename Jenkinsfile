@@ -16,6 +16,7 @@ pipeline {
     stages {
         stage('Plan') {
             steps {
+                ansiColor('xterm')
                 script {
                     currentBuild.displayName = params.version
                 }
@@ -34,6 +35,7 @@ pipeline {
             }
 
             steps {
+                ansiColor('xterm')
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
@@ -44,6 +46,7 @@ pipeline {
 
         stage('Apply') {
             steps {
+                ansiColor('xterm')
                 sh "terraform apply -input=false tfplan"
             }
         }
