@@ -16,9 +16,10 @@ pipeline {
     stages {
         stage('Plan') {
             steps {
-                ansiColor('xterm')
+                ansiColor('xterm'){
                 script {
                     currentBuild.displayName = params.version
+                }
                 }
                 sh 'terraform init -input=false'
                 sh 'terraform workspace select ${environment}'
@@ -35,19 +36,21 @@ pipeline {
             }
 
             steps {
-                ansiColor('xterm')
+                ansiColor('xterm') {
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
                         parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                }
                 }
             }
         }
 
         stage('Apply') {
             steps {
-                ansiColor('xterm')
+                ansiColor('xterm') {
                 sh "terraform apply -input=false tfplan"
+            }
             }
         }
     }
